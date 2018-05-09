@@ -1,0 +1,41 @@
+<iframe id="my0" src="https://www.tapd.cn/my_worktable/?from=left_tree_cloud_v2" borde="0"></iframe>
+<iframe id="my1" src="https://www.tapd.cn/my_worktable/?from=left_tree_cloud_v2" style="display:none" borde="0"></iframe>
+<style>
+body{
+	margin:0px;
+	padding:0px;
+}
+iframe{
+	border:none;
+	margin:0px;
+	padding:0px;
+	width:100%;
+	height:100%;
+}
+</style>
+<script>	
+	var href = 'https://www.tapd.cn/my_worktable/?from=left_tree_cloud_v2'
+	var index = 0;
+	var loopTime = 160
+	var lateTime = 5
+	function updateUrlSource(){
+		var hideid = 'my'+((index+1)%2);
+		document.getElementById(hideid).src='';
+		document.getElementById(hideid).src=href;
+		setTimeout(swiitchShow,lateTime*1000);
+	}
+	function swiitchShow(){
+		index++;
+		var showid = 'my'+(index%2);
+		var hideid = 'my'+((index+1)%2);
+		document.getElementById(hideid).style.display="none";
+		document.getElementById(showid).style.display="block";
+		update()
+	}
+	function update(){
+		setTimeout(function(){
+			updateUrlSource()
+		}, (loopTime-lateTime)*1000)
+	}
+	update()
+</script>
