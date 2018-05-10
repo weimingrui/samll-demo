@@ -1,0 +1,30 @@
+<a id='mobile' href="#">打电话</>
+<style>
+body{
+	margin:0px;
+	padding:0px;
+}
+
+</style>
+<script>	
+	var domId = 'mobile';
+	let callDOM = null;
+	//  兼容性处理，QQ浏览器不支持js直接打电话，模拟点击事件
+	//window.location.href = `tel:${mobile}`;
+	function callMobile(mobile){
+		callDOM = callDOM || document.getElementById(domId);
+		if (!(callDOM && callDOM.click)) {
+			callDOM = document.createElement('a');
+			callDOM.id = 'callMobile';
+			document.body.appendChild(callDOM);
+		} else if (callDOM.tagName!=="A"){
+			domId = domId+ Math.round()
+			callDOM = document.createElement('a');
+			callDOM.id = 'callMobile';
+			document.body.appendChild(callDOM);
+		}
+		callDOM.href = `tel:${mobile}`;
+		callDOM.click();
+		
+	}
+</script>
