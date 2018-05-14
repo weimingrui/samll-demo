@@ -1,0 +1,48 @@
+<script>
+function fromateMobile (str) {
+      // (0[0-9]{2,3}/-)?([2-9][0-9]{6,7})+(/-[0-9]{1,4})
+      let list = []
+      function regexString(string) {
+        let text = string
+        let info = {}
+        info.mobile = ''
+        info.beforeText = text
+        // info.afterText = ''
+        let regex = text.match(`(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]{8}`)
+        let regex2 = text.match(`([0-9]{3,4}-)?[0-9]{7,8}`)
+
+        if (!regex2 && regex && regex.length > 0) {
+          info.beforeText = text.substr(0, regex.index)
+          info.mobile = regex[0]
+          // info.afterText = text.substring(regex.index + 11)
+          list.push(info)
+          regexString(text.substring(regex.index + info.mobile.length), list)
+        } else if (!regex && regex2 && regex2.length > 0){
+          info.beforeText = text.substr(0, regex2.index)
+          info.mobile = regex2[0]
+          // info.afterText = text.substring(regex.index + 11)
+          list.push(info)
+          regexString(text.substring(regex2.index + info.mobile.length), list)
+        } else if(regex && regex2){
+          if (regex2.index >= regex.index) {
+            info.beforeText = text.substr(0, regex.index)
+            info.mobile = regex[0]
+            // info.afterText = text.substring(regex.index + 11)
+            list.push(info)
+            regexString(text.substring(regex.index + info.mobile.length), list)
+          } else {
+            info.beforeText = text.substr(0, regex2.index)
+            info.mobile = regex2[0]
+            // info.afterText = text.substring(regex.index + 11)
+            list.push(info)
+            regexString(text.substring(regex2.index + info.mobile.length), list)
+          }
+        } else {
+          list.push(info)
+          return list
+        }
+      }
+      regexString(str)
+      return list
+    }
+</script>
