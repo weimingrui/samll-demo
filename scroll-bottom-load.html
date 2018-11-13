@@ -1,0 +1,48 @@
+
+<html>
+<head>
+<style type="text/css">
+  .list-contain{
+    height: 400px;
+    width: 100%;
+    background: azure;
+    overflow-y: auto;
+    overflow-clip: none;
+  }
+</style>
+</head>
+<body>
+<div class="footer">asdasdasd</div>
+<div class="list-contain">
+</div>
+<script type="text/javascript">
+  function ScrollLoadMoreAddon(option) {
+    let onscroll=function (ev) {
+        console.log(ev)
+    }
+    if (document.addEventListener) {//firefox
+        document.addEventListener('DOMMouseScroll', onscroll, false);
+    }
+    //滚动滑轮触发scrollFunc方法  //ie 谷歌
+    window.onmousewheel = document.onmousewheel = onscroll;
+    ScrollLoadMoreAddon.prototype.loadMoreHandler = function() {
+      for(let i=0;i<20;i++){
+        createNewItem(i)
+      }
+    }
+  }
+
+  function createNewItem(html) {
+    let listDom = document.getElementsByClassName('list-contain')[0]
+    let newDom = document.createElement('div')
+    newDom.innerHTML = html
+    listDom.appendChild(newDom)
+  }
+  function init() {
+  	let scroll = new ScrollLoadMoreAddon()
+    scroll.loadMoreHandler()
+  }
+  window.onload = init()
+</script>
+</body>
+</html>
