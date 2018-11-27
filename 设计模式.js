@@ -1,4 +1,51 @@
 
+
+// 关键字词及用法示例  constructor instanceof isPrototypeOf getPrototypeOf
+// hasOwnProperty in
+//
+function Person(){
+}
+Person.prototype.name = "Nicholas";
+Person.prototype.age = 29;
+Person.prototype.job = "Software Engineer";
+Person.prototype.sayName = function(){
+	alert(this.name);
+};
+var person1 = new Person();
+person1.sayName(); //"Nicholas"
+var person2 = new Person();
+person2.sayName(); //"Nicholas"
+
+alert(person1.sayName == person2.sayName); //true
+
+// constructor
+alert(person1.constructor == Person); //true
+
+// instanceof
+alert(person1 instanceof Object); //true
+alert(person1 instanceof Person); //true
+
+// [[Prototype]] 指向调用 isPrototypeOf() 方法的对象
+//（ Person.prototype ）
+Person.prototype.isPrototypeOf(person1)//true
+
+//ECMAScript 5 增加了一个新方法，叫 Object.getPrototypeOf() ，在所有支持的实现中，这个
+//方法返回 [[Prototype]] 的值。例如：
+alert(Object.getPrototypeOf(person1) == Person.prototype); //true
+alert(Object.getPrototypeOf(person1).name); //"Nicholas"
+
+
+//是否存在于实例中 hasOwnProperty
+person1.name = "Greg";
+alert(person1.name); //"Greg"——来自实例
+alert(person1.hasOwnProperty("name")); //true
+//判断是否存在 in
+alert("name" in person1); //true
+//判断是否存在于原型之中
+function hasPrototypeProperty(object, name){
+	return !object.hasOwnProperty(name) && (name in object);
+}
+
 //原型语法
 function Person(){
 }
@@ -145,3 +192,4 @@ inheritPrototype(SubType, SuperType);
 SubType.prototype.sayAge = function(){
 	console.log(this.age);
 };
+
