@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-04-22 17:40:55
+ * @LastEditTime: 2020-05-07 17:17:56
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /myCode/samll-demo/device.js
+ */
 const Device = (function (){
     const userAgent = window.navigator.userAgent.toLowerCase()
     let device = {};
